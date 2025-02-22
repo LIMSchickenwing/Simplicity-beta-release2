@@ -15,7 +15,7 @@
         body {
             background-color: #060606;
             color: white;
-            font-family: 'Poppins', sans-serif; /* Use Poppins font */
+            font-family: 'Poppins', sans-serif;
             display: flex;
             height: 100vh;
             margin: 0;
@@ -23,7 +23,6 @@
             padding: 10px;
         }
 
-        /* Import Poppins font from Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         /* Left Box (Sidebar) */
@@ -40,7 +39,7 @@
             justify-content: flex-start;
             padding: 20px;
             align-items: flex-start;
-            flex-shrink: 0; /* Prevent the sidebar itself from shrinking */
+            flex-shrink: 0;
         }
 
         .icon {
@@ -49,39 +48,39 @@
             margin: 15px 0;
             cursor: pointer;
             transition: all 0.3s ease;
-            flex-shrink: 0; /* Prevent the icons from shrinking */
-            min-width: max-content; /* Ensure the text and icons don't wrap or shrink */
+            flex-shrink: 0;
+            min-width: max-content;
         }
 
         .icon-text {
             margin-left: 10px;
             font-size: 18px;
-            font-weight: 600; /* Bold text */
-            color: #888; /* Lighter grey for text */
+            font-weight: 600;
+            color: #888;
             transition: color 0.3s ease;
         }
 
         .icon svg {
             width: 25px;
             height: 25px;
-            fill: #888; /* Lighter grey for icons */
+            fill: #888;
             transition: fill 0.3s ease;
         }
 
         .icon.active svg {
-            fill: white; /* White icon for active page */
+            fill: white;
         }
 
         .icon.active .icon-text {
-            color: white; /* White text for active page */
+            color: white;
         }
 
         .icon:hover svg {
-            fill: white; /* Turn white on hover */
+            fill: white;
         }
 
         .icon:hover .icon-text {
-            color: white; /* Turn white on hover */
+            color: white;
         }
 
         /* Right Box (Main Content) */
@@ -93,12 +92,12 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Align content to the left */
+            align-items: flex-start;
             height: 100%;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
             overflow-y: auto;
             max-height: 100vh;
-            position: relative; /* Added for top-bar positioning */
+            position: relative;
         }
 
         .right-box::-webkit-scrollbar {
@@ -126,15 +125,22 @@
         }
 
         .top-bar .profile-picture:hover {
-            opacity: 0.8; /* Slight fade on hover */
+            opacity: 0.8;
         }
 
-        /* Account Content */
-        .account-content {
+        /* Banner */
+        .banner {
             width: 100%;
-            max-width: 100%; /* Stretch to full width */
-            text-align: left;
-            padding: 20px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Greeting Section */
@@ -151,34 +157,34 @@
             margin-right: 10px;
             transition: opacity 0.3s ease;
         }
-        
+
         .greeting h2 {
             margin: 0;
-            font-weight: 600; /* Bold text */
-            color: #D3D3D3; /* Lighter grey for text */
+            font-weight: 600;
+            color: #D3D3D3;
             transition: color 0.3s ease;
         }
 
         /* Sections */
         .account-content .section {
             margin-bottom: 30px;
-            width: 100%; /* Stretch sections to full width */
+            width: 100%;
         }
 
         .account-content .section h3 {
             margin-bottom: 10px;
-            font-weight: 600; /* Bold text */
-            color: #D3D3D3; /* Lighter grey for text */
+            font-weight: 600;
+            color: #D3D3D3;
             transition: color 0.3s ease;
         }
 
         .account-content .section p {
-            color: #888; /* Lighter grey for text */
+            color: #888;
             transition: color 0.3s ease;
         }
 
         .account-content .section p:hover {
-            color: white; /* Turn white on hover */
+            color: white;
         }
 
         .account-content .section ul {
@@ -191,14 +197,14 @@
         }
 
         .account-content .section ul li a {
-            color: #888; /* Lighter grey for text */
+            color: #888;
             text-decoration: none;
-            font-weight: 600; /* Bold text */
+            font-weight: 600;
             transition: color 0.3s ease;
         }
 
         .account-content .section ul li a:hover {
-            color: white; /* Turn white on hover */
+            color: white;
         }
 
         /* Buttons */
@@ -210,12 +216,12 @@
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
-            font-weight: 600; /* Bold text */
+            font-weight: 600;
             transition: background-color 0.3s ease;
         }
 
         .button:hover {
-            background-color: #555; /* Slightly lighter on hover */
+            background-color: #555;
         }
 
         /* Modals */
@@ -239,16 +245,17 @@
             padding: 20px;
             width: 300px;
             text-align: center;
-            position: relative; /* For close button positioning */
+            position: relative;
         }
 
         .modal-content h2 {
             margin-bottom: 20px;
-            font-weight: 600; /* Bold text */
-            color: #888; /* Lighter grey for text */
+            font-weight: 600;
+            color: #888;
         }
 
-        .modal-content input {
+        .modal-content input,
+        .modal-content textarea {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -266,11 +273,11 @@
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
-            font-weight: 600; /* Bold text */
+            font-weight: 600;
         }
 
         .modal-content button:hover {
-            background-color: #555; /* Slightly lighter on hover */
+            background-color: #555;
         }
 
         .modal-close {
@@ -279,28 +286,28 @@
             right: 10px;
             background: none;
             border: none;
-            color: #888; /* Lighter grey for text */
+            color: #888;
             font-size: 20px;
             cursor: pointer;
             transition: color 0.3s ease;
         }
 
         .modal-close:hover {
-            color: white; /* Turn white on hover */
+            color: white;
         }
-        
-        .switch {
-    color: #888; /* Lighter grey for text */
-    cursor: pointer; /* Change cursor to pointer */
-    font-weight: 600; /* Bold text */
-    margin-top: 10px; /* Add some spacing */
-    transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
 
-.switch:hover {
-    color: white; /* Turn white on hover */
-    text-decoration: underline; /* Optional: Add underline on hover */
-}
+        .switch {
+            color: #888;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .switch:hover {
+            color: white;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -338,24 +345,38 @@
 
         <!-- Account Content -->
         <div class="account-content">
+            <!-- Banner -->
+            <div class="banner">
+                <img id="profileBanner" src="https://via.placeholder.com/1200x300" alt="Profile Banner">
+            </div>
+
             <!-- Greeting Section -->
             <div class="greeting">
                 <img id="profilePicture" src="https://via.placeholder.com/150" alt="Profile Picture">
                 <h2>Good Morning, <span id="username"></span>!</h2>
             </div>
 
-            <!-- Account Settings Section -->
+            <!-- About Me Section -->
             <div class="section">
-                <h3>Settings</h3>
+                <h3>About Me</h3>
+                <p id="aboutMe">This is a placeholder for the user's bio.</p>
+            </div>
+
+            <!-- Edit Section (Only visible to the logged-in user) -->
+            <div class="section" id="editSection" style="display: none;">
+                <h3>Edit Profile</h3>
                 <ul>
                     <li><a href="#" onclick="openChangeUsernameModal()">Change Username</a></li>
                     <li><a href="#" onclick="openChangeProfilePictureModal()">Change Profile Picture</a></li>
+                    <li><a href="#" onclick="openChangeBannerModal()">Change Banner</a></li>
+                    <li><a href="#" onclick="openChangeBioModal()">Edit Bio</a></li>
                     <li><a href="#" onclick="logout()">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
+    <!-- Modals -->
     <!-- Sign-In Modal -->
     <div class="modal" id="signInModal">
         <div class="modal-content">
@@ -391,167 +412,160 @@
         </div>
     </div>
 
+    <!-- Change Banner Modal -->
+    <div class="modal" id="changeBannerModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeChangeBannerModal()">×</button>
+            <h2>Change Banner</h2>
+            <input type="url" id="newBanner" placeholder="New Banner URL" required>
+            <button class="button" onclick="changeBanner()">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Change Bio Modal -->
+    <div class="modal" id="changeBioModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeChangeBioModal()">×</button>
+            <h2>Edit Bio</h2>
+            <textarea id="newBio" placeholder="Write something about yourself..." required></textarea>
+            <button class="button" onclick="changeBio()">Confirm</button>
+        </div>
+    </div>
+
     <script>
         const backendUrl = 'https://simplicity-backend.onrender.com'; // Your backend URL
         let isSignIn = true;
+
+        // Get the username from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const profileUsername = urlParams.get('username') || '';
 
         // Handle Profile Picture Click
         function handleProfileClick() {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             if (currentUser) {
-                // Redirect to account.html if signed in
-                window.location.href = '/account.html';
+                window.location.href = `/account.html?username=${currentUser.username}`;
             } else {
-                // Open sign-in modal if not signed in
                 openSignInModal();
             }
         }
 
-        // Open Sign-In Modal
-        function openSignInModal() {
-            document.getElementById('signInModal').style.display = 'flex';
-        }
-
-        // Close Sign-In Modal
-        function closeSignInModal() {
-            document.getElementById('signInModal').style.display = 'none';
-        }
-
-        // Open Change Username Modal
-        function openChangeUsernameModal() {
-            document.getElementById('changeUsernameModal').style.display = 'flex';
-        }
-
-        // Close Change Username Modal
-        function closeChangeUsernameModal() {
-            document.getElementById('changeUsernameModal').style.display = 'none';
-        }
-
-        // Open Change Profile Picture Modal
-        function openChangeProfilePictureModal() {
-            document.getElementById('changeProfilePictureModal').style.display = 'flex';
-        }
-
-        // Close Change Profile Picture Modal
-        function closeChangeProfilePictureModal() {
-            document.getElementById('changeProfilePictureModal').style.display = 'none';
-        }
-
-        // Switch between Sign In and Sign Up
-        document.getElementById('switchAuth').addEventListener('click', () => {
-            isSignIn = !isSignIn;
-            const authTitle = document.getElementById('authTitle');
-            const authButton = document.getElementById('authButton');
-            const switchAuth = document.getElementById('switchAuth');
-            const profilePictureContainer = document.getElementById('profilePictureContainer');
-
-            if (isSignIn) {
-                authTitle.innerText = 'Sign In';
-                authButton.innerText = 'Sign In';
-                switchAuth.innerText = "Don't have an account? Sign Up";
-                profilePictureContainer.style.display = 'none';
-            } else {
-                authTitle.innerText = 'Sign Up';
-                authButton.innerText = 'Sign Up';
-                switchAuth.innerText = "Already have an account? Sign In";
-                profilePictureContainer.style.display = 'block';
-            }
-        });
-
-        // Handle Sign In / Sign Up
-        document.getElementById('authButton').addEventListener('click', async () => {
-            const username = document.getElementById('usernameInput').value;
-            const password = document.getElementById('passwordInput').value;
-            const profilePicture = document.getElementById('profilePictureInput').value || 'https://via.placeholder.com/150';
-
-            if (!username || !password) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            const endpoint = isSignIn ? '/login' : '/register';
-            const body = isSignIn ? { username, password } : { username, password, profilePicture };
-
+        // Fetch User Data
+        async function fetchUserData(username) {
             try {
-                const response = await fetch(`${backendUrl}${endpoint}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body),
-                });
-
+                const response = await fetch(`${backendUrl}/user/${username}`);
                 if (response.ok) {
                     const user = await response.json();
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    updateUI(user); // Update the UI with user data
-                    closeSignInModal(); // Close the modal
+                    updateUI(user);
+                    toggleEditMode(user);
                 } else {
-                    const error = await response.json();
-                    alert(error.error || 'An error occurred. Please try again.');
-                }
-            } catch (error) {
-                alert('Network error. Please check your connection.');
-            }
-        });
-
-        // Change Username
-        async function changeUsername() {
-            const newUsername = document.getElementById('newUsername').value;
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-            if (!newUsername) {
-                alert('Please enter a new username.');
-                return;
-            }
-
-            try {
-                const response = await fetch(`${backendUrl}/change-username`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId: currentUser.id, newUsername }),
-                });
-
-                if (response.ok) {
-                    const updatedUser = { ...currentUser, username: newUsername };
-                    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-                    document.getElementById('username').innerText = newUsername;
-                    closeChangeUsernameModal();
-                    alert('Username changed successfully!');
-                } else {
-                    const error = await response.json();
-                    alert(error.error || 'Failed to update username.');
+                    alert('User not found.');
+                    window.location.href = '/'; // Redirect to home if user not found
                 }
             } catch (error) {
                 alert('Network error. Please check your connection.');
             }
         }
 
-        // Change Profile Picture
-        async function changeProfilePicture() {
-            const newProfilePicture = document.getElementById('newProfilePicture').value;
+        // Update UI with User Data
+        function updateUI(user) {
+            document.getElementById('username').innerText = user.username;
+            document.getElementById('profilePicture').src = user.profilePicture;
+            document.getElementById('profilePictureTop').src = user.profilePicture;
+            document.getElementById('profileBanner').src = user.profileBanner || 'https://via.placeholder.com/1200x300';
+            document.getElementById('aboutMe').innerText = user.bio || 'This user has not written a bio yet.';
+        }
+
+        // Toggle Edit Mode
+        function toggleEditMode(user) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const editSection = document.getElementById('editSection');
+
+            if (currentUser && currentUser.username === user.username) {
+                editSection.style.display = 'block'; // Show edit options for the logged-in user
+            } else {
+                editSection.style.display = 'none'; // Hide edit options for other users
+            }
+        }
+
+        // Open Change Banner Modal
+        function openChangeBannerModal() {
+            document.getElementById('changeBannerModal').style.display = 'flex';
+        }
+
+        // Close Change Banner Modal
+        function closeChangeBannerModal() {
+            document.getElementById('changeBannerModal').style.display = 'none';
+        }
+
+        // Open Change Bio Modal
+        function openChangeBioModal() {
+            document.getElementById('changeBioModal').style.display = 'flex';
+        }
+
+        // Close Change Bio Modal
+        function closeChangeBioModal() {
+            document.getElementById('changeBioModal').style.display = 'none';
+        }
+
+        // Change Banner
+        async function changeBanner() {
+            const newBanner = document.getElementById('newBanner').value;
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-            if (!newProfilePicture) {
-                alert('Please enter a new profile picture URL.');
+            if (!newBanner) {
+                alert('Please enter a new banner URL.');
                 return;
             }
 
             try {
-                const response = await fetch(`${backendUrl}/change-profile-picture`, {
+                const response = await fetch(`${backendUrl}/change-banner`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId: currentUser.id, newProfilePicture }),
+                    body: JSON.stringify({ userId: currentUser.id, newBanner }),
                 });
 
                 if (response.ok) {
-                    const updatedUser = { ...currentUser, profilePicture: newProfilePicture };
+                    const updatedUser = { ...currentUser, profileBanner: newBanner };
                     localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-                    document.getElementById('profilePicture').src = newProfilePicture;
-                    document.getElementById('profilePictureTop').src = newProfilePicture;
-                    closeChangeProfilePictureModal();
-                    alert('Profile picture changed successfully!');
+                    document.getElementById('profileBanner').src = newBanner;
+                    closeChangeBannerModal();
+                    alert('Banner changed successfully!');
                 } else {
                     const error = await response.json();
-                    alert(error.error || 'Failed to update profile picture.');
+                    alert(error.error || 'Failed to update banner.');
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection.');
+            }
+        }
+
+        // Change Bio
+        async function changeBio() {
+            const newBio = document.getElementById('newBio').value;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (!newBio) {
+                alert('Please enter a new bio.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${backendUrl}/change-bio`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: currentUser.id, newBio }),
+                });
+
+                if (response.ok) {
+                    const updatedUser = { ...currentUser, bio: newBio };
+                    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                    document.getElementById('aboutMe').innerText = newBio;
+                    closeChangeBioModal();
+                    alert('Bio updated successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(error.error || 'Failed to update bio.');
                 }
             } catch (error) {
                 alert('Network error. Please check your connection.');
@@ -564,19 +578,14 @@
             window.location.reload(); // Reload the page to reset the UI
         }
 
-        // Update UI with User Data
-        function updateUI(user) {
-            document.getElementById('username').innerText = user.username;
-            document.getElementById('profilePicture').src = user.profilePicture;
-            document.getElementById('profilePictureTop').src = user.profilePicture;
-        }
-
         // Load user data on page load
         window.onload = () => {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-            if (currentUser) {
-                updateUI(currentUser); // Update UI if user is already logged in
+            if (profileUsername) {
+                fetchUserData(profileUsername); // Fetch the profile data for the user in the URL
+            } else if (currentUser) {
+                window.location.href = `/account.html?username=${currentUser.username}`; // Redirect to the logged-in user's profile
             } else {
                 openSignInModal(); // Open the sign-in modal if no user is logged in
             }
