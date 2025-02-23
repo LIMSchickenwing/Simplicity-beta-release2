@@ -450,42 +450,34 @@
             }
         }
 
-        // Fetch User Data
-        async function fetchUserData(username) {
-            try {
-                const response = await fetch(`${backendUrl}/user/${username}`);
-                if (response.ok) {
-                    const user = await response.json();
-                    updateUI(user);
-                    toggleEditMode(user);
-                } else {
-                    alert('User not found.');
-                    window.location.href = '/'; // Redirect to home if user not found
-                }
-            } catch (error) {
-                alert('Network error. Please check your connection.');
-            }
+        // Open Sign-In Modal
+        function openSignInModal() {
+            document.getElementById('signInModal').style.display = 'flex';
         }
 
-        // Update UI with User Data
-        function updateUI(user) {
-            document.getElementById('username').innerText = user.username;
-            document.getElementById('profilePicture').src = user.profilePicture;
-            document.getElementById('profilePictureTop').src = user.profilePicture;
-            document.getElementById('profileBanner').src = user.profileBanner || 'https://via.placeholder.com/1200x300';
-            document.getElementById('aboutMe').innerText = user.bio || 'This user has not written a bio yet.';
+        // Close Sign-In Modal
+        function closeSignInModal() {
+            document.getElementById('signInModal').style.display = 'none';
         }
 
-        // Toggle Edit Mode
-        function toggleEditMode(user) {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            const editSection = document.getElementById('editSection');
+        // Open Change Username Modal
+        function openChangeUsernameModal() {
+            document.getElementById('changeUsernameModal').style.display = 'flex';
+        }
 
-            if (currentUser && currentUser.username === user.username) {
-                editSection.style.display = 'block'; // Show edit options for the logged-in user
-            } else {
-                editSection.style.display = 'none'; // Hide edit options for other users
-            }
+        // Close Change Username Modal
+        function closeChangeUsernameModal() {
+            document.getElementById('changeUsernameModal').style.display = 'none';
+        }
+
+        // Open Change Profile Picture Modal
+        function openChangeProfilePictureModal() {
+            document.getElementById('changeProfilePictureModal').style.display = 'flex';
+        }
+
+        // Close Change Profile Picture Modal
+        function closeChangeProfilePictureModal() {
+            document.getElementById('changeProfilePictureModal').style.display = 'none';
         }
 
         // Open Change Banner Modal
@@ -506,6 +498,127 @@
         // Close Change Bio Modal
         function closeChangeBioModal() {
             document.getElementById('changeBioModal').style.display = 'none';
+        }
+
+        // Switch between Sign In and Sign Up
+        document.getElementById('switchAuth').addEventListener('click', () => {
+            isSignIn = !isSignIn;
+            const authTitle = document.getElementById('authTitle');
+            const authButton = document.getElementById('authButton');
+            const switchAuth = document.getElementById('switchAuth');
+            const profilePictureContainer = document.getElementById('profilePictureContainer');
+
+            if (isSignIn) {
+                authTitle.innerText = 'Sign In';
+                authButton.innerText = 'Sign In';
+                switchAuth.innerText = "Don't have an account? Sign Up";
+                profilePictureContainer.style.display = 'none';
+            } else {
+                authTitle.innerText = 'Sign Up';
+                authButton.innerText = 'Sign Up';
+                switchAuth.innerText = "Already have an account? Sign In";
+                profilePictureContainer.style.display = 'block';
+            }
+        });
+
+        // Handle Sign In / Sign Up
+        document.getElementById('authButton').addEventListener('click', async () => {
+            const username = document.getElementById('usernameInput').value;
+            const password = document.getElementById('passwordInput').value;
+            const profilePicture = document.getElementById('profilePictureInput').value || 'https://via.placeholder.com/150';
+
+            if (!username || !password) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const endpoint = isSignIn ? '/login' : '/register';
+            const body = isSignIn ? { username, password } : { username, password, profilePicture };
+
+            try {
+                const response = await fetch(`${backendUrl}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
+                });
+
+                if (response.ok) {
+                    const user = await response.json();
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    updateUI(user); // Update the UI with user data
+                    closeSignInModal(); // Close the modal
+                } else {
+                    const error = await response.json();
+                    alert(error.error || 'An error occurred. Please try again.');
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection.');
+            }
+        });
+
+        // Change Username
+        async function changeUsername() {
+            const newUsername = document.getElementById('newUsername').value;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (!newUsername) {
+                alert('Please enter a new username.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${backendUrl}/change-username`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: currentUser.id, newUsername }),
+                });
+
+                if (response.ok) {
+                    const updatedUser = { ...currentUser, username: newUsername };
+                    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                    document.getElementById('username').innerText = newUsername;
+                    closeChangeUsernameModal();
+                    alert('Username changed successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(error.error || 'Failed to update username.');
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection.');
+            }
+        }
+
+        // Change Profile Picture
+        async function changeProfilePicture() {
+            const newProfilePicture = document.getElementById('newProfilePicture').value;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (!newProfilePicture) {
+                alert('Please enter a new profile picture URL.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${backendUrl}/change-profile-picture`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: currentUser.id, newProfilePicture }),
+                });
+
+                if (response.ok) {
+                    const updatedUser = { ...currentUser, profilePicture: newProfilePicture };
+                    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                    document.getElementById('profilePicture').src = newProfilePicture;
+                    document.getElementById('profilePictureTop').src = newProfilePicture;
+                    closeChangeProfilePictureModal();
+                    alert('Profile picture changed successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(error.error || 'Failed to update profile picture.');
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection.');
+            }
         }
 
         // Change Banner
@@ -578,18 +691,76 @@
             window.location.reload(); // Reload the page to reset the UI
         }
 
+        // Update UI with User Data
+        function updateUI(user) {
+            document.getElementById('username').innerText = user.username;
+            document.getElementById('profilePicture').src = user.profilePicture;
+            document.getElementById('profilePictureTop').src = user.profilePicture;
+            document.getElementById('profileBanner').src = user.profileBanner || 'https://via.placeholder.com/1200x300';
+            document.getElementById('aboutMe').innerText = user.bio || 'This user has not written a bio yet.';
+        }
+
         // Load user data on page load
         window.onload = () => {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
             if (profileUsername) {
-                fetchUserData(profileUsername); // Fetch the profile data for the user in the URL
+                // Public Profile Page
+                fetchUserData(profileUsername);
             } else if (currentUser) {
-                window.location.href = `/account.html?username=${currentUser.username}`; // Redirect to the logged-in user's profile
+                // Account Page (Logged-In User)
+                fetchLoggedInUserData(currentUser.id);
             } else {
-                openSignInModal(); // Open the sign-in modal if no user is logged in
+                // No user logged in, redirect to sign-in
+                openSignInModal();
             }
         };
+
+        // Fetch User Data
+        async function fetchUserData(username) {
+            try {
+                const response = await fetch(`${backendUrl}/user/${username}`);
+                if (response.ok) {
+                    const user = await response.json();
+                    updateUI(user);
+                    toggleEditMode(user);
+                } else {
+                    alert('User not found.');
+                    window.location.href = '/'; // Redirect to home if user not found
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection.');
+            }
+        }
+
+        // Fetch Logged-In User Data
+        async function fetchLoggedInUserData(userId) {
+            try {
+                const response = await fetch(`${backendUrl}/user-by-id/${userId}`);
+                if (response.ok) {
+                    const user = await response.json();
+                    updateUI(user);
+                    toggleEditMode(user);
+                } else {
+                    alert('User not found.');
+                    window.location.href = '/'; // Redirect to home if user not found
+                }
+            } catch (error) {
+                alert('Network error. Please check your connection.');
+            }
+        }
+
+        // Toggle Edit Mode
+        function toggleEditMode(user) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const editSection = document.getElementById('editSection');
+
+            if (currentUser && currentUser.id === user.id) {
+                editSection.style.display = 'block'; // Show edit options for the logged-in user
+            } else {
+                editSection.style.display = 'none'; // Hide edit options for other users
+            }
+        }
     </script>
 </body>
 </html>
